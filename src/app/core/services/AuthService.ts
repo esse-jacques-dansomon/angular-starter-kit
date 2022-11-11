@@ -1,13 +1,10 @@
-import {Vendor} from './../../data/types/Vendor';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import * as moment from 'moment';
-import {finalize, Observable, tap} from 'rxjs';
-import {LoginResponse} from 'src/app/data/types/LoginResponse';
+import {finalize, tap} from 'rxjs';
 import {environment} from "../../../environments/environment";
-import {ConnectedVendorInfo} from "../../data/types/connected-vendor-info";
 import {Router} from "@angular/router";
-import {Boutique} from 'src/app/data/types/Boutique';
+import {LoginResponse} from "../data/LoginResponse";
 
 
 @Injectable({
@@ -99,27 +96,13 @@ export class AuthService {
    sendotp(otp: string) {
 
       let email = localStorage.getItem('email_reset');
-      let response = this.http.post(`${this.apiUrl}/auth/password/otp/verif`, { email, otp });
-
-      return response;
+       return this.http.post(`${this.apiUrl}/auth/password/otp/verif`, {email, otp});
    }
 
-   VendorConnected(): ConnectedVendorInfo {
-      return (JSON.parse(atob(localStorage.getItem("access_token").split('.')[1]))) as ConnectedVendorInfo;
+   VendorConnected(): any {
+      return (JSON.parse(atob(localStorage.getItem("access_token").split('.')[1]))) ;
    }
 
-   vendeurLog(): any  {
-      //let vendeur: Vendor = {}
-      let url = `${this.apiUrl}` + '/vendeur';
-      let vendeur : Vendor ;
-      return this.http.get<Observable<Boutique>>(url).subscribe(
-         (data) => {
-            // vendeur = data['vendeur'] as Vendor;
-            // console.log(vendeur);
-         }
-      );
-
-   }
 
    updateVendeur(vendeur: any){
       let url = `${this.apiUrl}` + '/vendeur';

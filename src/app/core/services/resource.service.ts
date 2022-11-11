@@ -1,9 +1,8 @@
 import {HttpClient} from "@angular/common/http";
 import { Observable } from 'rxjs';
 import {environment} from "../../../environments/environment";
-import {ResourceModel} from "../../data/types/resource-model";
 import {Injectable} from "@angular/core";
-
+import {ResourceModel} from "../data/resource-model";
 
 
 @Injectable({
@@ -37,10 +36,10 @@ export abstract class ResourceService<T extends  ResourceModel<T>> {
    getOneByTypeAndUri$ = (uri: string): Observable<any> => this.httpClient.get<any>(`${this.apiUrl}/${uri}`);
 
    getOneByTypeAndUriAndPage$ = (uri: string, page : number, pageSize = '40'): Observable<any> => this.httpClient.get<any>(`${this.apiUrl}/${uri}`,  {params: {page: page.toString(),pageSize: pageSize}});
+
    getOneByTypeAndPage$ = ( page : number, pageSize = '40'): Observable<any> => this.httpClient.get<any>(`${this.apiUrl}`,  {params: {page: page.toString(),pageSize: pageSize}});
 
    addOneByTypeAndUri$ = (uri: string, resource: any): Observable<any> => this.httpClient.post<any>(`${this.apiUrl}/${uri}`, resource);
 
    updateOneByTypeAndUri$ = (uri: string, resource: any): Observable<any> => this.httpClient.put<any>(`${this.apiUrl}${uri}`, resource);
-   //getOneByTypeAndUriWithPage
 }

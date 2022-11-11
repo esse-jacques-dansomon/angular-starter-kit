@@ -7,12 +7,12 @@ import {
 import { Observable } from 'rxjs';
 import {environment} from "../../../environments/environment";
 import {Injectable} from "@angular/core";
-import {PaysService} from "../../data/services/pays.service";
+// import {PaysService} from "../../data/services/pays.service";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-   constructor(private paysService : PaysService) {}
+   constructor() {}
 
    intercept(req: HttpRequest<any>,
              next: HttpHandler): Observable<HttpEvent<any>> {
@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
          const cloned = req.clone({
             headers: req.headers
                .set("Authorization", "Bearer " + idToken)
-               .set("countryCode", this.paysService.getPaysFromLocal() ? this.paysService.getPaysFromLocal().code : 'sn')
+               // .set("countryCode", this.paysService.getPaysFromLocal() ? this.paysService.getPaysFromLocal().code : 'sn')
             //add country to header
          });
          return next.handle(cloned);
@@ -30,7 +30,7 @@ export class AuthInterceptor implements HttpInterceptor {
       else {
          const cloned2 = req.clone({
             headers: req.headers
-               .set("countryCode",this.paysService.getPaysFromLocal() ? this.paysService.getPaysFromLocal().code : 'sn')
+               // .set("countryCode",this.paysService.getPaysFromLocal() ? this.paysService.getPaysFromLocal().code : 'sn')
             //add country to header
          });
          return next.handle(cloned2);

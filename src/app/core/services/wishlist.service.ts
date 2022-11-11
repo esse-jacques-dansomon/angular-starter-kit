@@ -1,7 +1,10 @@
 import {BehaviorSubject, Observable, of} from "rxjs";
-import {Product} from "../../data/types/Product";
 import {Injectable} from "@angular/core";
 import {ToastrService} from "ngx-toastr";
+
+interface Product{
+  id: number;
+}
 
 @Injectable({
    providedIn: 'root'

@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { isObservable, of } from 'rxjs';
-import { map, startWith, catchError } from 'rxjs/operators';
+import { isObservable, of, OperatorFunction} from 'rxjs';
+import {map, startWith, catchError} from 'rxjs/operators';
 
 @Pipe({
-   name: 'withLoading',
+  name: 'withLoading',
 })
 export class WithLoadingPipe implements PipeTransform {
-   transform(val) {
+  transform(val: { pipe: (arg0: OperatorFunction<any, { loading: boolean; value: any; }>, arg1: OperatorFunction<{ loading: boolean; value: any; }, { loading: boolean; value: any; } | { loading: boolean; }>, arg2: OperatorFunction<{ loading: boolean; value: any; } | { loading: boolean; }, { loading: boolean; value: any; } | { loading: boolean; } | { loading: boolean; error: any; }>) => any; }) {
       return isObservable(val)
          ? val.pipe(
             map((value: any) => ({ loading: false, value })),

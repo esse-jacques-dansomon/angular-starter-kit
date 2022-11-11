@@ -4,7 +4,8 @@ import {map, tap} from "rxjs/operators"
 import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
-import {LoginResponse} from "../../data/types/LoginResponse";
+import {LoginResponse} from "../data/LoginResponse";
+
 
 @Injectable({
    providedIn: 'root'
